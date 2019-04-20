@@ -652,13 +652,13 @@ int smithyPlayed (int card, struct gameState *state, int handPos, int currentPla
       drawCard(currentPlayer, state);
    } 
    //discard card from hand
-   discardCard(handPos, currentPlayer, state, 0);
+   discardCard(currentPlayer, handPos, state, 0);
    return 0;   
 };
 
 int adventurerPlayed(int drawntreasure, struct gameState *state, int currentPlayer, int cardDrawn, int *temphand, int z){
    while(drawntreasure < 2){
-      if (state->deckCount[currentPlayer] < 1){
+      if (state->deckCount[currentPlayer] == 1){
          shuffle(currentPlayer, state);
       };
       drawCard(currentPlayer, state);
@@ -682,14 +682,14 @@ int villagePlayed(int currentPlayer, struct gameState* state, int handPos){
    //+1 Card
    drawCard(currentPlayer, state);
    //+2 Actions
-   state->numActions = state->numActions + 2;
+   state->numActions = state->numActions++;
    //discard played card from hand
    discardCard(handPos, currentPlayer, state, 0);
    return 0;
 };
 
 int gardensPlayed(){
-   return -1;
+   return 0;
 };
 
 int great_hallPlayed(int currentPlayer, struct gameState* state, int handPos){
