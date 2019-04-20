@@ -697,8 +697,8 @@ int great_hallPlayed(int currentPlayer, struct gameState* state, int handPos){
    drawCard(currentPlayer, state);
    //+1 Actions
    state->numActions++;
-      //discard card from hand
-      discardCard(handPos, currentPlayer, state, 0);
+   //discard card from hand
+   discardCard(handPos, currentPlayer, state, 0);
    return 0;
 };
 
@@ -838,9 +838,9 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 
          return 0;
 
-      case gardens:
-         return -1;
-
+         /*      case gardens:
+                 return -1;
+                 */
       case mine:
          j = state->hand[currentPlayer][choice1];  //store card we will trash
 
@@ -975,7 +975,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 
          return 0;
 
-      case great_hall:
+         /*      case great_hall:
          //+1 Card
          drawCard(currentPlayer, state);
 
@@ -985,7 +985,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
          //discard card from hand
          discardCard(handPos, currentPlayer, state, 0);
          return 0;
-
+         */
       case minion:
          //+1 action
          state->numActions++;
