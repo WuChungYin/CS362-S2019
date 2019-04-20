@@ -678,6 +678,30 @@ int adventurerPlayed(int drawntreasure, struct gameState *state, int currentPlay
    return 0;
 };
 
+int villagePlayed(int currentPlayer, struct gameState* state, int handPos){
+   //+1 Card
+   drawCard(currentPlayer, state);
+   //+2 Actions
+   state->numActions = state->numActions + 2;
+   //discard played card from hand
+   discardCard(handPos, currentPlayer, state, 0);
+   return 0;
+};
+
+int gardensPlayed(){
+   return -1;
+};
+
+int great_hallPlayed(int currentPlayer, struct gameState* state, int handPos){
+   //+1 Card
+   drawCard(currentPlayer, state);
+   //+1 Actions
+   state->numActions++;
+      //discard card from hand
+      discardCard(handPos, currentPlayer, state, 0);
+   return 0;
+};
+
 int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus)
 {
    int i;
@@ -704,7 +728,15 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
    if(card == adventurer){
       adventurerPlayed(drawntreasure, state, currentPlayer, cardDrawn, temphand, z);
    };	
-
+   if(card == village){
+      villagePlayed(currentPlayer, state, handPos);
+   };
+   if(card == gardens){
+      gardensPlayed();
+   };
+   if(card == great_hall){
+      great_hallPlayed(currentPlayer, state, handPos);
+   };
    //uses switch to select card and perform actions
    switch( card ) 
    {
@@ -881,7 +913,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
          discardCard(handPos, currentPlayer, state, 0);
          return 0;
          */	
-      case village:
+         /*      case village:
          //+1 Card
          drawCard(currentPlayer, state);
 
@@ -891,7 +923,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
          //discard played card from hand
          discardCard(handPos, currentPlayer, state, 0);
          return 0;
-
+         */
       case baron:
          state->numBuys++;//Increase buys by 1!
          if (choice1 > 0){//Boolean true or going to discard an estate
