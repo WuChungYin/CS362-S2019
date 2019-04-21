@@ -689,14 +689,14 @@ int villagePlayed(int currentPlayer, struct gameState* state, int handPos){
 };
 
 int gardensPlayed(){
-   return 0;
+   return -1;
 };
 
 int great_hallPlayed(int currentPlayer, struct gameState* state, int handPos){
    //+1 Card
    drawCard(currentPlayer, state);
    //+1 Actions
-   state->numActions++;
+   state->numActions = state->numActions + 2;
    //discard card from hand
    discardCard(handPos, currentPlayer, state, 0);
    return 0;
