@@ -644,7 +644,7 @@ int getCost(int cardNumber)
 }
 
 //refactored card functions below
-int smithyPlayed (int card, struct gameState *state, int handPos, int currentPlayer){
+int smithyPlayed(struct gameState *state, int handPos, int currentPlayer){
    //+3 Cards
    int i;
    for (i = 0; i < 3; i++)
@@ -656,13 +656,13 @@ int smithyPlayed (int card, struct gameState *state, int handPos, int currentPla
    return 0;   
 };
 
-int adventurerPlayed(int drawntreasure, struct gameState *state, int currentPlayer, int cardDrawn, int *temphand, int z){
+int adventurerPlayed(int drawntreasure, struct gameState *state, int currentPlayer, int *temphand, int z){
    while(drawntreasure < 2){
       if (state->deckCount[currentPlayer] == 1){
          shuffle(currentPlayer, state);
       };
       drawCard(currentPlayer, state);
-      cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]-1];
+      int cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]-1];
       if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold)
          drawntreasure++;
       else{
@@ -715,7 +715,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
    int tributeRevealedCards[2] = {-1, -1};
    int temphand[MAX_HAND];// moved above the if statement
    int drawntreasure=0;
-   int cardDrawn;
+   //int cardDrawn;
    int z = 0;// this is the counter for the temp hand
    if (nextPlayer > (state->numPlayers - 1)){
       nextPlayer = 0;
@@ -723,10 +723,10 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 
    //refactored card functions called 
    if(card == smithy){
-      smithyPlayed(card, state, handPos, currentPlayer );
+      smithyPlayed(state, handPos, currentPlayer);
    };
    if(card == adventurer){
-      adventurerPlayed(drawntreasure, state, currentPlayer, cardDrawn, temphand, z);
+      adventurerPlayed(drawntreasure, state, currentPlayer, temphand, z);
    };	
    if(card == village){
       villagePlayed(currentPlayer, state, handPos);
