@@ -6,13 +6,22 @@
 char inputChar()
 {
     // TODO: rewrite this function
-    return ' ';
+    char c;
+    c = (char)(rand()%94) + 32; //ascii 32 to 125; ' ' to '}'
+    return c;
 }
 
 char *inputString()
 {
     // TODO: rewrite this function
-    return "";
+    char s[6];
+    int i;
+
+    for(i = 0; i < 5; i++){ //set s[0] to s[4] to letters between 'e' and 't'
+       s[i] = (char)(rand()%16) + 101; //ascii 101 to 116; 'e' to 't'
+       }
+       s[5] = '\0'; //set s[5] to null
+    return &s;
 }
 
 void testme()
