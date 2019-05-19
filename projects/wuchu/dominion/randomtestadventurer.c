@@ -16,7 +16,7 @@ int main () {
    PutSeed(3);
 
    int n;
-   for(n = 0; n < 1000; n++){
+   for(n = 0; n < 10000; n++){
 //randomizing inputs for adventurerPlayed() function
       int drawntreasure = rand() % 2;
       int m;
