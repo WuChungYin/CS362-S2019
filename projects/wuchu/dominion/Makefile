@@ -1,4 +1,4 @@
-CFLAGS= -Wall -fpic -coverage -lm -std=c99
+CFLAGS = -Wall -fpic -coverage -lm -std=c99
 
 rngs.o: rngs.h rngs.c
 	gcc -c rngs.c -g  $(CFLAGS)
@@ -32,6 +32,22 @@ runtests: testDrawCard
 	gcov dominion.c >> unittestresult.out
 	cat dominion.c.gcov >> unittestresult.out
 
+randomtestresults: randomtestadventurer.c randomtestcard1.c randomtestcard2.c dominion.o rngs.o
+	echo "---RANDOMTESTADVENTURER.C---" >> randomtestresults.out
+	gcc -o randomtestadventurer randomtestadventurer.c dominion.o rngs.o $(CFLAGS)
+	./randomtestadventurer >> randomtestresults.out
+	gcov -b randomtestadventurer.c >> randomtestresults.out
+	cat randomtestadventurer.c.gcov >> randomtestresults.out
+	echo "---RANDOMTESTCARD1.C---" >> randomtestresults.out
+	gcc -o randomtestcard1 randomtestcard1.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard1 >> randomtestresults.out
+	gcov -b randomtestcard1.c >> randomtestresults.out
+	cat randomtestcard1.c.gcov >> randomtestresults.out
+	echo "---RANDOMTESTCARD2.C---" >> randomtestresults.out
+	gcc -o randomtestcard2 randomtestcard2.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard2 >> randomtestresults.out 
+	gcov -b randomtestcard2.c >> randomtestresults.out
+	cat randomtestcard2.c.gcov >> randomtestresults.out
 
 player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
